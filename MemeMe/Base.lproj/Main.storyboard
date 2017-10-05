@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,14 +46,17 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YXO-wB-IEi">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM TEXT" textAlignment="natural" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="kmW-Xx-UZy" userLabel="Bottom text">
-                                <rect key="frame" x="74" y="555" width="227" height="48"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM TEXT" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="kmW-Xx-UZy" userLabel="Bottom text">
+                                <rect key="frame" x="20" y="555" width="335" height="48"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP TEXT" textAlignment="natural" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="2b6-Ib-Hbm" userLabel="Top text">
-                                <rect key="frame" x="110.5" y="84" width="154" height="48"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP TEXT" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="2b6-Ib-Hbm" userLabel="Top text">
+                                <rect key="frame" x="20" y="84" width="335" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="335" id="8RS-Yd-UhZ"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -87,10 +90,14 @@
                             <constraint firstItem="YXO-wB-IEi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="AjO-U8-Rq9"/>
                             <constraint firstItem="2b6-Ib-Hbm" firstAttribute="centerX" secondItem="YXO-wB-IEi" secondAttribute="centerX" id="HRh-Wv-pH3"/>
                             <constraint firstItem="kls-cL-pkI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IbV-C2-UQo"/>
+                            <constraint firstItem="2b6-Ib-Hbm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="S0o-u6-Thr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BDe-4w-FI1" secondAttribute="trailing" id="UJN-lk-Tji"/>
                             <constraint firstItem="kmW-Xx-UZy" firstAttribute="centerX" secondItem="YXO-wB-IEi" secondAttribute="centerX" id="UJd-Wf-HZE"/>
                             <constraint firstItem="kmW-Xx-UZy" firstAttribute="bottom" secondItem="YXO-wB-IEi" secondAttribute="bottom" constant="-20" id="YXv-gr-mXf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2b6-Ib-Hbm" secondAttribute="trailing" constant="20" id="ZBb-61-lpB"/>
                             <constraint firstItem="kls-cL-pkI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="f1m-oM-bUb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kmW-Xx-UZy" secondAttribute="trailing" constant="20" id="fmL-yi-9l6"/>
+                            <constraint firstItem="kmW-Xx-UZy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="h73-EV-fPy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YXO-wB-IEi" secondAttribute="trailing" id="hKR-dr-qcJ"/>
                             <constraint firstItem="YXO-wB-IEi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="isB-ml-hfi"/>
                             <constraint firstItem="2b6-Ib-Hbm" firstAttribute="top" secondItem="YXO-wB-IEi" secondAttribute="top" constant="20" id="jyH-R4-XkY"/>
