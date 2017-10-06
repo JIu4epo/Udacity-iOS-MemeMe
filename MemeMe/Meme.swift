@@ -6,7 +6,6 @@
 //  Copyright © 2017 Borys Tkachenko. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Meme {

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  MemeMe
 //
 //  Created by Borys Tkachenko on 9/29/17.
@@ -139,17 +139,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.navigationController?.setToolbarHidden(true, animated: false)
-        
+        hideShowBar(hidden: true)
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        hideShowBar(hidden: false)
         return memedImage
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    func hideShowBar(hidden: Bool){
+        self.navigationController?.setNavigationBarHidden(hidden, animated: false)
+        self.navigationController?.setToolbarHidden(hidden, animated: false)
     }
     
     //MARK: UITextFieldDelegate
