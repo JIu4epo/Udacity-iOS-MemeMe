@@ -118,6 +118,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             originalImage: imageView.image!,
             memedImage: generateMemedImage()
         )
+        
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     func prepareTextField(_ textField: UITextField){
