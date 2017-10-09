@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UIViewController {
+class SentMemesCollectionViewController: UICollectionViewController {
 
     var memes = [Meme]()
     override func viewDidLoad() {

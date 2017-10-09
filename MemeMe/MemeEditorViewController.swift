@@ -76,6 +76,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func resetToDefault(){
         reset()
+        
     }
     
     //MARK: Keyboard movement
