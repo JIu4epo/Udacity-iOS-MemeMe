@@ -15,6 +15,7 @@
 		A929F7CD1F7EFF0200238516 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A929F7CB1F7EFF0200238516 /* Main.storyboard */; };
 		A929F7CF1F7EFF0200238516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A929F7CE1F7EFF0200238516 /* Assets.xcassets */; };
 		A929F7D21F7EFF0200238516 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A929F7D01F7EFF0200238516 /* LaunchScreen.storyboard */; };
+		A92A3FB11F8D212D0058236C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92A3FB01F8D212D0058236C /* DetailViewController.swift */; };
 		A92DE1481F86855100BD1F59 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92DE1471F86855100BD1F59 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		A929F7CE1F7EFF0200238516 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A929F7D11F7EFF0200238516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A929F7D31F7EFF0300238516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A92A3FB01F8D212D0058236C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A92DE1471F86855100BD1F59 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				A90AE9811F87D2CE00D7EA69 /* SentMemesTableViewController.swift */,
 				A90AE9831F87D2E700D7EA69 /* SentMemesCollectionViewController.swift */,
 				A91439911F8BD6E50081B8DE /* SentMemeTableViewCell.swift */,
+				A92A3FB01F8D212D0058236C /* DetailViewController.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A92DE1481F86855100BD1F59 /* Meme.swift in Sources */,
+				A92A3FB11F8D212D0058236C /* DetailViewController.swift in Sources */,
 				A929F7CA1F7EFF0200238516 /* MemeEditorViewController.swift in Sources */,
 				A90AE9841F87D2E700D7EA69 /* SentMemesCollectionViewController.swift in Sources */,
 				A91439921F8BD6E50081B8DE /* SentMemeTableViewCell.swift in Sources */,

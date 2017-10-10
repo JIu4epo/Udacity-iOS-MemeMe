@@ -35,6 +35,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    @IBOutlet weak var topToolbar: UIToolbar!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
+
+    
     //MARK: View overrides
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +71,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let controller = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
+                print("Not complited")
                 return
+            } else {
+                print("Complited")
             }
             self.save()
+//            self.resetToDefault()
         }
         self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func resetToDefault(){
         reset()
+//        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -110,6 +120,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         controller.delegate = self
         controller.sourceType = sourceType
         self.present(controller, animated: true, completion: nil)
+
     }
     
     func save() {
@@ -120,9 +131,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             memedImage: generateMemedImage()
         )
         
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
+        print("==",appDelegate.memes.count)
     }
     
     func prepareTextField(_ textField: UITextField){
@@ -146,6 +157,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generateMemedImage() -> UIImage {
         hideShowBar(hidden: true)
         UIGraphicsBeginImageContext(self.view.frame.size)
+//        UIGraphicsBeginImageContext(self.imageView.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -154,8 +166,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func hideShowBar(hidden: Bool){
-        self.navigationController?.setNavigationBarHidden(hidden, animated: false)
-        self.navigationController?.setToolbarHidden(hidden, animated: false)
+        topToolbar.isHidden = hidden
+        bottomToolbar.isHidden = hidden
     }
     
     //MARK: UITextFieldDelegate

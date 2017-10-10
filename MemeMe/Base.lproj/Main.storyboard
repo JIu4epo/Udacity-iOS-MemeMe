@@ -70,6 +70,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9g-5v-Dqc">
                                             <rect key="frame" x="0.0" y="0.0" width="81" height="81"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" constant="81" id="8KL-mb-CAz" userLabel="width = 100"/>
                                                 <constraint firstAttribute="width" secondItem="s9g-5v-Dqc" secondAttribute="height" multiplier="10:10" id="Ae3-o8-ndm"/>
                                             </constraints>
                                         </imageView>
@@ -180,6 +181,35 @@
             </objects>
             <point key="canvasLocation" x="-188" y="307"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="BNU-9d-WeS">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="35P-eK-bIj" customClass="DetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2MQ-dC-FMh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rXw-13-lAG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rXw-13-lAG" firstAttribute="leading" secondItem="JGu-nU-9eQ" secondAttribute="leading" id="RHz-rt-5tc"/>
+                            <constraint firstItem="JGu-nU-9eQ" firstAttribute="trailing" secondItem="rXw-13-lAG" secondAttribute="trailing" id="SG6-ys-f65"/>
+                            <constraint firstItem="JGu-nU-9eQ" firstAttribute="bottom" secondItem="rXw-13-lAG" secondAttribute="bottom" id="YZv-Uo-hZF"/>
+                            <constraint firstItem="rXw-13-lAG" firstAttribute="top" secondItem="JGu-nU-9eQ" secondAttribute="top" id="daT-br-KO8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JGu-nU-9eQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="rXw-13-lAG" id="iMn-sQ-rhu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSJ-q0-fIf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="866" y="324"/>
+        </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -273,12 +303,14 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="kmW-Xx-UZy" id="WWo-xa-DyR"/>
+                        <outlet property="bottomToolbar" destination="kls-cL-pkI" id="QHQ-qe-oCy"/>
                         <outlet property="cancelButton" destination="5EH-fb-cRH" id="HAu-aa-dGw"/>
                         <outlet property="imageFromAlbumButton" destination="4n6-8m-vYc" id="s5o-3I-TvT"/>
                         <outlet property="imageFromCameraButton" destination="Sfe-8R-7Ra" id="Pqy-rD-fhY"/>
                         <outlet property="imageView" destination="YXO-wB-IEi" id="jG6-jE-Vwl"/>
                         <outlet property="shareButton" destination="pAa-cc-fvd" id="wkF-1V-XlP"/>
                         <outlet property="topTextField" destination="2b6-Ib-Hbm" id="QfB-J4-BvO"/>
+                        <outlet property="topToolbar" destination="BDe-4w-FI1" id="cIW-Vh-UY2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -291,6 +323,6 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8RK-Qu-U1L"/>
+        <segue reference="7K0-p5-En4"/>
     </inferredMetricsTieBreakers>
 </document>
