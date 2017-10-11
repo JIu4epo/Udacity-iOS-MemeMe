@@ -149,19 +149,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ztH-eo-92U">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="151" height="108"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="x5P-hW-5wI">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SentMemeCollectionViewCell" id="x5P-hW-5wI" customClass="SentMemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="151" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="151" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-mr-qMW">
+                                            <rect key="frame" x="0.0" y="0.0" width="151" height="108"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="nUi-mr-qMW" firstAttribute="leading" secondItem="x5P-hW-5wI" secondAttribute="leading" id="8xe-um-AVe"/>
+                                    <constraint firstAttribute="trailing" secondItem="nUi-mr-qMW" secondAttribute="trailing" id="d0d-Up-np2"/>
+                                    <constraint firstItem="nUi-mr-qMW" firstAttribute="top" secondItem="x5P-hW-5wI" secondAttribute="top" id="dcX-T6-Khl"/>
+                                    <constraint firstAttribute="bottom" secondItem="nUi-mr-qMW" secondAttribute="bottom" id="uA6-7m-5FB"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="nUi-mr-qMW" id="rXx-bp-kPL"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -179,7 +193,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvM-Zo-5sL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="307"/>
+            <point key="canvasLocation" x="-188" y="306.29685157421289"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="BNU-9d-WeS">

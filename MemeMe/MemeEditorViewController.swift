@@ -71,15 +71,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let controller = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
-                print("Not complited")
+                let alert = UIAlertController(title: "Opps... Something wrong", message: "Can't complete image picking", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 return
-            } else {
-                print("Complited")
             }
             self.save()
 //            self.resetToDefault()
         }
-        self.present(controller, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: {
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     @IBAction func resetToDefault(){
