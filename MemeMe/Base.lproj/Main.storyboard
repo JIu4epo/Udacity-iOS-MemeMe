@@ -118,6 +118,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="35P-eK-bIj" kind="show" id="qe4-SZ-68z"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVu-Fe-Xpn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -162,7 +165,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="151" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-mr-qMW">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-mr-qMW">
                                             <rect key="frame" x="0.0" y="0.0" width="151" height="108"/>
                                         </imageView>
                                     </subviews>
@@ -190,6 +193,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="flowLayout" destination="ztH-eo-92U" id="sWR-Xq-eEf"/>
+                        <segue destination="35P-eK-bIj" kind="show" id="wzk-33-1zA"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvM-Zo-5sL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -204,7 +211,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rXw-13-lAG">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -303,19 +310,20 @@
                             <constraint firstItem="2b6-Ib-Hbm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="S0o-u6-Thr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BDe-4w-FI1" secondAttribute="trailing" id="UJN-lk-Tji"/>
                             <constraint firstItem="kmW-Xx-UZy" firstAttribute="centerX" secondItem="YXO-wB-IEi" secondAttribute="centerX" id="UJd-Wf-HZE"/>
-                            <constraint firstItem="kmW-Xx-UZy" firstAttribute="bottom" secondItem="YXO-wB-IEi" secondAttribute="bottom" constant="-20" id="YXv-gr-mXf"/>
+                            <constraint firstItem="kmW-Xx-UZy" firstAttribute="bottom" secondItem="YXO-wB-IEi" secondAttribute="bottom" constant="-20" identifier="bottomLabelToImageView" id="YXv-gr-mXf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2b6-Ib-Hbm" secondAttribute="trailing" constant="20" id="ZBb-61-lpB"/>
                             <constraint firstItem="kls-cL-pkI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="f1m-oM-bUb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kmW-Xx-UZy" secondAttribute="trailing" constant="20" id="fmL-yi-9l6"/>
                             <constraint firstItem="kmW-Xx-UZy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="h73-EV-fPy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YXO-wB-IEi" secondAttribute="trailing" id="hKR-dr-qcJ"/>
                             <constraint firstItem="YXO-wB-IEi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="isB-ml-hfi"/>
-                            <constraint firstItem="2b6-Ib-Hbm" firstAttribute="top" secondItem="YXO-wB-IEi" secondAttribute="top" constant="20" id="jyH-R4-XkY"/>
+                            <constraint firstItem="2b6-Ib-Hbm" firstAttribute="top" secondItem="YXO-wB-IEi" secondAttribute="top" constant="20" identifier="topLabelToImageView" id="jyH-R4-XkY"/>
                             <constraint firstItem="YXO-wB-IEi" firstAttribute="top" secondItem="BDe-4w-FI1" secondAttribute="bottom" id="vAn-iQ-hkT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomLabelToImageViewConstraint" destination="YXv-gr-mXf" id="yPR-GT-Uak"/>
                         <outlet property="bottomTextField" destination="kmW-Xx-UZy" id="WWo-xa-DyR"/>
                         <outlet property="bottomToolbar" destination="kls-cL-pkI" id="QHQ-qe-oCy"/>
                         <outlet property="cancelButton" destination="5EH-fb-cRH" id="HAu-aa-dGw"/>
@@ -323,6 +331,7 @@
                         <outlet property="imageFromCameraButton" destination="Sfe-8R-7Ra" id="Pqy-rD-fhY"/>
                         <outlet property="imageView" destination="YXO-wB-IEi" id="jG6-jE-Vwl"/>
                         <outlet property="shareButton" destination="pAa-cc-fvd" id="wkF-1V-XlP"/>
+                        <outlet property="topLabelToImageViewConstraint" destination="jyH-R4-XkY" id="Cdj-aJ-y1s"/>
                         <outlet property="topTextField" destination="2b6-Ib-Hbm" id="QfB-J4-BvO"/>
                         <outlet property="topToolbar" destination="BDe-4w-FI1" id="cIW-Vh-UY2"/>
                     </connections>
@@ -337,6 +346,7 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7K0-p5-En4"/>
+        <segue reference="8RK-Qu-U1L"/>
+        <segue reference="qe4-SZ-68z"/>
     </inferredMetricsTieBreakers>
 </document>

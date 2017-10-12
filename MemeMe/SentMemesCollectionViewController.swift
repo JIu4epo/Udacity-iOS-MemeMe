@@ -14,6 +14,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
     
     let reusableCellId = "SentMemeCollectionViewCell"
     let detailViewControllerId = "DetailViewController"
+    let space: CGFloat = 3.0
     
     var memes = [Meme]()
     
@@ -21,6 +22,13 @@ class SentMemesCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
+        
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,5 +58,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    override func
+    
+    
 }

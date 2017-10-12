@@ -16,6 +16,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     let textFieldMinFontSize: CGFloat = 10
     var imageIsLoaded: Bool = false
     
+    var imageWidth: CGFloat?
+    var imageHeight: CGFloat?
+    var differenceHeight: CGFloat?
+    
+    var imageViewHeight: CGFloat?
+    var imageViewWidth: CGFloat?
+
+    let bottomLabelToImageViewConstaintId = "bottomLabelToImageView"
+    let topLabelToImageViewConstaintId = "topLabelToImageView"
+    let newTopLabelToImageViewConstaintId = "newTopLabelToImageView"
+    let newBottomLabelToImageViewConstaintId = "newBottomLabelToImageView"
+
+    
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
@@ -38,6 +51,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
 
+    @IBOutlet weak var topLabelToImageViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomLabelToImageViewConstraint: NSLayoutConstraint!
     
     //MARK: View overrides
     override func viewDidLoad() {
@@ -50,12 +65,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
         imageFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        //        self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(animated)
         self.unsubscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            changeVerticalConstraintForLandscape()
+        } else {
+            changeVerticalConstraintForPortrait()
+        }
     }
     
     //MARK: Actions
@@ -71,6 +93,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let controller = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
+                print("not complited")
                 let alert = UIAlertController(title: "Opps... Something wrong", message: "Can't complete image picking", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -79,9 +102,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.save()
 //            self.resetToDefault()
         }
-        self.present(controller, animated: true, completion: {
-            self.dismiss(animated: true, completion: nil)
-        })
+        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func resetToDefault(){
@@ -116,13 +137,68 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return keyboardSize.cgRectValue.height
     }
     
+    func changeInitialVerticalConstraint(){
+        self.imageViewHeight = self.imageView.bounds.height
+        self.imageViewWidth = self.imageView.bounds.width
+        
+        self.differenceHeight = self.view.bounds.height - self.imageViewHeight!
+        
+        setNewConstraints()
+    }
+    
+    func changeVerticalConstraintForPortrait(){
+        self.imageViewHeight = self.imageView.bounds.width - self.differenceHeight!
+        self.imageViewWidth = self.view.bounds.height
+
+        setNewConstraints()
+    }
+    
+    func changeVerticalConstraintForLandscape(){
+        self.imageViewHeight = self.imageView.bounds.width
+        self.imageViewWidth = self.imageView.bounds.height
+
+       setNewConstraints()
+    }
+    
     //MARK: Functions
+    func setNewConstraints(){
+        let imageSize = self.imageView.image!.size
+        let scaledImageHeight = min(imageSize.height * (self.imageViewWidth! / imageSize.width), self.imageViewHeight!)
+//        let halfImageHeight = scaledImageHeight / 2.0
+//        let halfImageViewHeigth = self.imageViewHeight! / 2.0
+        
+//        let additionalHeightConstraint = halfImageViewHeigth - halfImageHeight
+        
+        let additionalHeightConstraint = getHeightDifference(scaledImageHeight: scaledImageHeight)
+        
+        let viewConstraints = self.view.constraints
+        for constraint in viewConstraints {
+            if (constraint.identifier == topLabelToImageViewConstaintId) || (constraint.identifier == bottomLabelToImageViewConstaintId) || (constraint.identifier == newTopLabelToImageViewConstaintId) || ((constraint.identifier == newBottomLabelToImageViewConstaintId)){
+                constraint.isActive = false
+            }
+        }
+        
+        let newTopConstraint = NSLayoutConstraint(item: topTextField, attribute: .top, relatedBy: .equal, toItem: imageView, attribute: .top, multiplier: 1, constant: additionalHeightConstraint)
+        newTopConstraint.identifier = newTopLabelToImageViewConstaintId
+        self.view.addConstraint(newTopConstraint)
+        
+        let newBottomConstraint = NSLayoutConstraint(item: bottomTextField, attribute: .bottom, relatedBy: .equal, toItem: imageView, attribute: .bottom, multiplier: 1, constant: -additionalHeightConstraint)
+        newBottomConstraint.identifier = newBottomLabelToImageViewConstaintId
+        self.view.addConstraint(newBottomConstraint)
+    }
+    
+    func getHeightDifference(scaledImageHeight: CGFloat) -> CGFloat{
+        let halfImageHeight = scaledImageHeight / 2.0
+        let halfImageViewHeigth = self.imageViewHeight! / 2.0
+        
+        return halfImageViewHeigth - halfImageHeight
+    }
+    
     func pick(sourceType: UIImagePickerControllerSourceType){
         let controller = UIImagePickerController()
         controller.delegate = self
         controller.sourceType = sourceType
         self.present(controller, animated: true, completion: nil)
-
     }
     
     func save() {
@@ -135,7 +211,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
-        print("==",appDelegate.memes.count)
     }
     
     func prepareTextField(_ textField: UITextField){
@@ -157,19 +232,39 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
-        hideShowBar(hidden: true)
-        UIGraphicsBeginImageContext(self.view.frame.size)
-//        UIGraphicsBeginImageContext(self.imageView.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        hideShowBar(hidden: false)
-        return memedImage
-    }
-    
-    func hideShowBar(hidden: Bool){
-        topToolbar.isHidden = hidden
-        bottomToolbar.isHidden = hidden
+        
+        if UIDevice.current.orientation == UIDeviceOrientation.portrait || UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown {
+            let imageSize = self.imageView.image!.size
+            let scaledImageHeight = min(imageSize.height * (self.imageViewWidth! / imageSize.width), self.imageViewHeight!)
+            let scaledImageWidth = min(imageSize.width * (self.imageViewHeight! / imageSize.height), self.imageViewWidth!)
+            let y = ((self.view.bounds.size.height + UIApplication.shared.statusBarFrame.height) / 2.0) - (scaledImageHeight / 2.0)
+            
+            let size = CGSize(width: scaledImageWidth, height: scaledImageHeight)
+            UIGraphicsBeginImageContext(size)
+            UIGraphicsGetCurrentContext()?.translateBy(x: 0, y: -y)
+            
+            view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+            
+            let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return memedImage
+        } else {
+            let imageSize = self.imageView.image!.size
+            let scaledImageHeight = min(imageSize.height * (self.imageViewWidth! / imageSize.width), self.imageViewHeight!) - (topToolbar.frame.size.height + bottomToolbar.frame.size.height)
+            let scaledImageWidth = min(imageSize.width * (scaledImageHeight / imageSize.height), self.imageViewWidth!)
+            let x = (self.view.bounds.size.width / 2.0) - (scaledImageWidth / 2.0)
+            let y = (self.view.bounds.size.height / 2.0) - (scaledImageHeight / 2.0)
+            
+            let size = CGSize(width: scaledImageWidth, height: scaledImageHeight)
+            UIGraphicsBeginImageContext(size)
+            UIGraphicsGetCurrentContext()?.translateBy(x: -x, y: -y)
+            
+            view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+            
+            let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return memedImage
+        }
     }
     
     //MARK: UITextFieldDelegate
@@ -210,6 +305,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.shareButton.isEnabled = true
             imageIsLoaded = true
             imageView.image = image
+            changeInitialVerticalConstraint()
+//            changeVerticalConstraintForPortrait()
         }
     }
     
