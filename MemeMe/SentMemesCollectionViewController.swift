@@ -23,12 +23,12 @@ class SentMemesCollectionViewController: UICollectionViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         
-        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
 
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        flowLayout.itemSize = CGSize(width: widthDimension, height: widthDimension)
     }
     
     override func viewWillAppear(_ animated: Bool) {
