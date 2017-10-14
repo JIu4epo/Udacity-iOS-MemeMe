@@ -73,10 +73,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-            changeVerticalConstraintForLandscape()
-        } else {
-            changeVerticalConstraintForPortrait()
+        if imageView.image != nil {
+            if UIDevice.current.orientation.isLandscape {
+                changeVerticalConstraintForLandscape()
+            } else {
+                changeVerticalConstraintForPortrait()
+            }
         }
     }
     
